@@ -1,10 +1,4 @@
-// fetch("http://localhost:8088/food")
-//     .then(foods => foods.json())
-//     .then(parsedFoods => {
-//         console.table(parsedFoods)
-//     })
 
-  
 // accessing the food list container in the DOM
 const foodList = document.querySelector(".foodList")
 
@@ -27,4 +21,12 @@ const addFoodItem = (foodObject) => {
   let newFoodItem = makeFoodItem(foodObject)
   foodList.appendChild(newFoodItem)
 }
+
+fetch("http://localhost:8088/food")
+    .then(foods => foods.json())
+    .then(parsedFoods => {
+        parsedFoods.forEach(food => {
+            return addFoodItem(food)
+        })
+    })
 
