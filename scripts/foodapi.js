@@ -4,38 +4,27 @@
 //         console.table(parsedFoods)
 //     })
 
-let pizza = {
-  name: "pizza",
-  type: "dinner",
-  ethnicity: "italian"
-}
   
+// accessing the food list container in the DOM
 const foodList = document.querySelector(".foodList")
 
-const createFoodItem = (foodObject) => {`
-<section class="foodItem">
-    <h2>${foodObject}.name</h2>
-    <p>${foodObject}.type/p>
-    <p>${foodObject}.ethnicity</p>
-</section>
-`
-}
-
-const makeFoodItem = (foodName) => { 
+// function to make the food item component
+const makeFoodItem = (foodObject) => { 
   let foodItem = document.createElement("section")
-  foodItem.innerHTML = `<h1>${foodName}</h1>`
-  foodList.appendChild(foodItem)
+  foodItem.innerHTML = `
+    <section class="foodItem">
+      <h1>${foodObject["name"]}</h1>
+      <p>${foodObject["type"]}</p>
+      <p>${foodObject["ethnicity"]}</p>
+    </section>  
+    `
+    return foodItem
 }
 
-makeFoodItem("pizza")
-// const insertFoodItem = (pizza) => {
-//   let foodItem = createFoodItem(pizza)
-//   foodList.appendChild(foodItem)
-//   return foodItem
-// }
+// function to add the food itm component to the DOM. Calling the make food component function inside.
 
+const addFoodItem = (foodObject) => {
+  let newFoodItem = makeFoodItem(foodObject)
+  foodList.appendChild(newFoodItem)
+}
 
-
-
-
-// Create a function that inserts an HTML representation of a food into the DOM
