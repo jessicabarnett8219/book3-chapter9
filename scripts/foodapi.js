@@ -1,7 +1,8 @@
+console.log("hey")
 // defining a function to get data from my API
 
-const getMyFood = () => {
-  return fetch("http://localhost:3000/food")
+const getMyFoodArray = () => {
+  return fetch("http://localhost:8088/food/")
   .then(foods => foods.json())
 }
 
@@ -25,7 +26,6 @@ const makeFoodHTML = (name, country, ingredients, calories, fat, sugar) => {
 }
 
 // defining a function that selects the container on the DOM and at the HTML component. HTML component is passed in as the argument
-
 const foodList = (food) => {
   return document.querySelector(".foodList").innerHTML += food
 }
@@ -35,37 +35,29 @@ const foodMaker = () => {
   // getting our food data and turning it to JS
   getMyFoodArray()
     // take that data
-    .then((myFoodArray) => {
+    .then(myFoodArray => {
       // iterate over it
-      myFoodArray.forEach((myFood) => {
+      myFoodArray.forEach(myFood => {
         // on each iteration grab the barcode from our food data, call the function to get external data, passing the barcode in as an argument
         getExternalFood(myFood.barcode)
           // then use that data to pull out the following info and assign them to variables
           .then((externalFoodArray) => {
-            const sugar = externalFoodArray.nutrients["sugars"]
-            const calories = externalFoodArray.nutrients["energy"]
-            const fat = externalFoodArray.nutrients["fat"]
-            const ingredients = apiFoodArray.nutrients["ingredients"]
+            const sugar = externalFoodArray.product.nutriments["sugars"]
+            const calories = externalFoodArray.product.nutriments["energy"]
+            const fat = externalFoodArray.product.nutriments["fat"]
+            const ingredients = externalFoodArray.product["ingredients"]
 
             // calling the function that makes the HTML component
-            const foodComponent = makeFoodHTML(myFoodArray.name, myFoodArray.ethnicity, ingredients, calories, fat, sugar)
-
-
-
+            const foodComponent = makeFoodHTML(myFood.name, myFood.ethnicity, ingredients, calories, fat, sugar)
+            // calling the function that adds it to the DOM
+            foodList(foodComponent)
           })
-
-
-      }
-
-    }) 
-
-
-
-
-
-
+      })
+    } )
 
 }
+
+foodMaker()
 
 
 
