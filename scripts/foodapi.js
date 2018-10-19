@@ -17,11 +17,11 @@ const makeFoodHTML = (name, country, ingredients, calories, fat, sugar) => {
   return `
     <section class="foodItem">
       <h1>${name}</h1>
-      <p>${country}</p>
-      <p>${ingredients}</p>
-      <p>${calories}</p>
-      <p>${fat}</p>
-      <p>${sugar}</p>
+      <p>Ethnicity: ${country}</p>
+      <p>Ingredients: ${ingredients}</p>
+      <p>Calories: ${calories}</p>
+      <p>Fat: ${fat}</p>
+      <p>Sugar: ${sugar}</p>
     </section>  `
 }
 
@@ -45,7 +45,7 @@ const foodMaker = () => {
             const sugar = externalFoodArray.product.nutriments["sugars"]
             const calories = externalFoodArray.product.nutriments["energy"]
             const fat = externalFoodArray.product.nutriments["fat"]
-            const ingredients = externalFoodArray.product["ingredients"]
+            const ingredients = externalFoodArray.product["ingredients_text"]
 
             // calling the function that makes the HTML component
             const foodComponent = makeFoodHTML(myFood.name, myFood.ethnicity, ingredients, calories, fat, sugar)
